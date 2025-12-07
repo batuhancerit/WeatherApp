@@ -19,7 +19,7 @@ It provides real-time weather data, city search, geolocation support.
 - OpenWeatherMap API
 
 ## Installation
-git clone https://github.com/USERNAME/WeatherApp.git
-cd WeatherApp
-npm install
-npm start
+- git clone https://github.com/batuhancerit/WeatherApp.git
+- cd WeatherApp
+- npm install
+- npm start

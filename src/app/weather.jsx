@@ -13,6 +13,8 @@ import ThemedText from "../components/ThemedText";
 import useForecasts from "../hooks/useForecasts";
 import useWeather from "../hooks/useWeather";
 import { getDayName } from "../utils/helper";
+import { getLocationData, storeLocationData } from "../utils/storage";
+import { useEffect } from "react";
 const weather = () => {
   const { locationLongitude, locationLatitude, latitude, longitude } =
     useLocalSearchParams();
@@ -29,6 +31,16 @@ const weather = () => {
     forecastsData,
   } = useForecasts(lat, lon);
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
+
+  useEffect(() => {
+    const loadLocation = async () => {
+      const storedLocation = await getLocationData();
+      if (!storedLocation) {
+        await storeLocationData({ latitude: lat, longitude: lon });
+      }
+    };
+    loadLocation();
+  }, []);
 
   if (forecastsError || currentWeatherError) {
     return <ErrorMessage message={forecastsError || currentWeatherError} />;

@@ -15,11 +15,11 @@ import useWeather from "../hooks/useWeather";
 import { getDayName } from "../utils/helper";
 import { getLocationData, storeLocationData } from "../utils/storage";
 import { useEffect } from "react";
-const weather = () => {
-  const { locationLongitude, locationLatitude, latitude, longitude } =
-    useLocalSearchParams();
-  const lat = locationLatitude ?? latitude;
-  const lon = locationLongitude ?? longitude;
+
+const Weather = () => {
+  const params = useLocalSearchParams();
+  const lat = params.locationLatitude ?? params.latitude;
+  const lon = params.locationLongitude ?? params.longitude;
   const {
     loading: currentWeatherLoading,
     data: currentWeatherData,
@@ -40,7 +40,7 @@ const weather = () => {
       }
     };
     loadLocation();
-  }, []);
+  }, [lat, lon]);
 
   if (forecastsError || currentWeatherError) {
     return <ErrorMessage message={forecastsError || currentWeatherError} />;
@@ -108,7 +108,7 @@ const weather = () => {
   );
 };
 
-export default weather;
+export default Weather;
 
 const styles = StyleSheet.create({
   currentWeatherView: {

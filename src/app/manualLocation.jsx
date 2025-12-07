@@ -55,8 +55,8 @@ const ManualLocation = () => {
               router.replace({
                 pathname: "weather",
                 params: {
-                  locationLongitude: JSON.stringify(city.lon),
-                  locationLatitude:JSON.stringify(city.lat)
+                  locationLongitude: city.lon,
+                  locationLatitude: city.lat,
                 },
               });
             }}
